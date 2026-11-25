@@ -1,0 +1,22 @@
+XXEProbe Report
+============================================================
+Target:   http://127.0.0.1:5000/upload
+Started:  2026-11-23 04:17:26
+Finished: 2026-11-23 04:17:28
+Verdict:  VULNERABLE
+
+Evidence:
+  - out_of_band_hit: False
+  - in_band_marker_reflected: True
+  - param_entity_hit: False
+  - error_signatures: ['XMLSyntaxError']
+
+Remediation:
+  Disable DTD / external-entity processing in the XML parser (e.g. in lxml: resolve_entities=False and load_dtd=False / use defusedxml; in Java: setFeature XMLConstants.FEATURE_SECURE_PROCESSING; in general: reject documents containing a DOCTYPE declaration).
+
+Step details:
+  - {'step': 'baseline', 'status': 200, 'error': None}
+  - {'step': 'out_of_band', 'status': 200, 'error': None, 'listener_hit': False, 'hits': []}
+  - {'step': 'in_band', 'status': 200, 'error': None, 'marker_reflected': True, 'response_snippet': 'Parsed OK. Content: XXEPROBE_LAB_MARKER_42'}
+  - {'step': 'param_entity', 'status': 200, 'error': None, 'listener_hit': False}
+  - {'step': 'error_based', 'status': 500, 'error': None, 'signatures_found': ['XMLSyntaxError'], 'response_snippet': "XMLSyntaxError: Entity 'undefined_entity_xxeprobe' not defined, line 3, column 14 (<string>, line 3)"}

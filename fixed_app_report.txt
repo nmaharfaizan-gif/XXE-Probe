@@ -1,0 +1,22 @@
+XXEProbe Report
+============================================================
+Target:   http://127.0.0.1:5001/upload
+Started:  2026-11-23 04:19:27
+Finished: 2026-11-23 04:19:29
+Verdict:  NOT VULNERABLE
+
+Evidence:
+  - out_of_band_hit: False
+  - in_band_marker_reflected: False
+  - param_entity_hit: False
+  - error_signatures: []
+
+Remediation:
+  Disable DTD / external-entity processing in the XML parser (e.g. in lxml: resolve_entities=False and load_dtd=False / use defusedxml; in Java: setFeature XMLConstants.FEATURE_SECURE_PROCESSING; in general: reject documents containing a DOCTYPE declaration).
+
+Step details:
+  - {'step': 'baseline', 'status': 200, 'error': None}
+  - {'step': 'out_of_band', 'status': 200, 'error': None, 'listener_hit': False, 'hits': []}
+  - {'step': 'in_band', 'status': 200, 'error': None, 'marker_reflected': False, 'response_snippet': 'Parsed OK. Content: '}
+  - {'step': 'param_entity', 'status': 200, 'error': None, 'listener_hit': False}
+  - {'step': 'error_based', 'status': 400, 'error': None, 'signatures_found': [], 'response_snippet': 'Could not parse XML document.'}
